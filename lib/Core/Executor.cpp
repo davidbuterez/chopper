@@ -4619,7 +4619,7 @@ void Executor::onNormalStateWrite(
 
   uint64_t concreteAddress = dyn_cast<ConstantExpr>(address)->getZExtValue();
   size_t sizeInBytes = value->getWidth() / 8;
-  assert(sizeInBytes * 8 == value->getWidth());
+  assert(value->getWidth() == 1 || sizeInBytes * 8 == value->getWidth());
 
   /* TODO: don't add if already recovered */
   state.addWrittenAddress(concreteAddress, sizeInBytes, state.getCurrentSnapshotIndex());
